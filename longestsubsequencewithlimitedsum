@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<int> answerQueries(vector<int>& nums, vector<int>& queries) {
+        /*
+        step 1: reorder the nums into ascending order 
+        step 2: take first value in the query, count how many of the nums can be added together
+                until the sum exceeds the query value
+        step 3: store the quantity of nums into a return vector<int>
+        step 4: repeat this as many times as there are values in the queries vector
+        */
+        
+        vector<int> retvector;
+
+        sort(nums.begin(), nums.end());
+
+        for (int i = 0; i < queries.size(); i++){
+
+            int sum = 0;
+            int numsquantity = 0;
+
+                for (int j = 0; j < nums.size(); j++){
+
+                    sum += nums[j];
+
+                        if (sum > queries[i]){
+                            retvector.push_back(numsquantity);
+                            break;
+                        }
+
+                    numsquantity ++;
+
+                        if (j == nums.size() - 1){
+                            retvector.push_back(numsquantity);
+                        }
+                }
+        }
+
+        return retvector;
+    }
+};
